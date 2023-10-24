@@ -3,6 +3,7 @@ const app = express();
 const port = 3000;
 
 app.use(express.static(__dirname + "/public"));
+app.set("view engine", "ejs");
 
 const { MongoClient } = require("mongodb");
 
@@ -28,9 +29,5 @@ app.get("/", (req, res) => {
 
 app.get("/list", async (req, res) => {
   let data = await db.collection("post").find().toArray();
-  console.log(data);
-  console.log(data[0]);
-  console.log(data[0].title);
-  console.log(data[0].content);
-  res.send(data[0].content);
+  res.render("list.ejs", { posts: data });
 });
