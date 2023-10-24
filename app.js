@@ -26,6 +26,11 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.get("/db-test", (req, res) => {
-  db.collection("post").insertOne({ name: "db-test", working: "well" });
+app.get("/list", async (req, res) => {
+  let data = await db.collection("post").find().toArray();
+  console.log(data);
+  console.log(data[0]);
+  console.log(data[0].title);
+  console.log(data[0].content);
+  res.send(data[0].content);
 });
