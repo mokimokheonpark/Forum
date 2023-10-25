@@ -4,6 +4,8 @@ const port = 3000;
 
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const { MongoClient } = require("mongodb");
 
@@ -30,4 +32,15 @@ app.get("/", (req, res) => {
 app.get("/list", async (req, res) => {
   let data = await db.collection("post").find().toArray();
   res.render("list.ejs", { posts: data });
+});
+
+app.get("/write", (req, res) => {
+  res.render("write.ejs");
+});
+
+app.post("/write-post", async (req, res) => {
+  await db
+    .collection("post")
+    .insertOne({ title: req.body.title, content: req.body.content });
+  res.redirect("/list");
 });
