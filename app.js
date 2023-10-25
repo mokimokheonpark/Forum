@@ -39,8 +39,19 @@ app.get("/write", (req, res) => {
 });
 
 app.post("/write-post", async (req, res) => {
-  await db
-    .collection("post")
-    .insertOne({ title: req.body.title, content: req.body.content });
-  res.redirect("/list");
+  try {
+    if (req.body.title === "") {
+      res.send("Please write the title");
+    } else if (req.body.content === "") {
+      res.send("Please write the content");
+    } else {
+      await db
+        .collection("post")
+        .insertOne({ title: req.body.title, content: req.body.content });
+      res.redirect("/list");
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(500).send("There is an error in the server");
+  }
 });
