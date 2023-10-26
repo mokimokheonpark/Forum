@@ -37,6 +37,10 @@ body {
   margin: 5px;
 }
 
+.list-box a {
+  text-decoration: none;
+}
+
 .list-box p {
   font-size: 13px;
   margin: 5px;

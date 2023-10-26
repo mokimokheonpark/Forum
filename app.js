@@ -52,12 +52,21 @@ app.post("/write-post", async (req, res) => {
     }
   } catch (e) {
     console.log(e);
-    res.status(500).send("There is an error in the server");
+    res.status(500).send("Internal Server Error");
   }
 });
 
 app.get("/detail/:id", async (req, res) => {
-  let id = req.params.id;
-  let data = await db.collection("post").findOne({ _id: new ObjectId(id) });
-  res.render("detail.ejs", { data: data });
+  try {
+    let id = req.params.id;
+    let data = await db.collection("post").findOne({ _id: new ObjectId(id) });
+    if (data === null) {
+      res.status(404).send("Not Found");
+    } else {
+      res.render("detail.ejs", { data: data });
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(404).send("Not Found");
+  }
 });
