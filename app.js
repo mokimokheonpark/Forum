@@ -30,8 +30,13 @@ app.get("/", (req, res) => {
 });
 
 app.get("/list", async (req, res) => {
-  let data = await db.collection("post").find().toArray();
-  res.render("list.ejs", { posts: data });
+  try {
+    let data = await db.collection("post").find().toArray();
+    res.render("list.ejs", { posts: data });
+  } catch (e) {
+    console.log(e);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 app.get("/write", (req, res) => {
