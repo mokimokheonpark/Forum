@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
 const port = 3000;
+const methodOverride = require("method-override");
 
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 
 const { MongoClient, ObjectId } = require("mongodb");
 
@@ -91,7 +93,7 @@ app.get("/edit/:id", async (req, res) => {
   }
 });
 
-app.post("/edit-post", async (req, res) => {
+app.put("/edit-put", async (req, res) => {
   try {
     if (req.body.id === "") {
       res.send("Invalid post id");
