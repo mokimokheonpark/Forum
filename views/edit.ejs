@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="/styles.css" rel="stylesheet" />
+  </head>
+
+  <body class="grey-bg">
+    <%- include("nav.ejs") %>
+
+    <form class="form-box" action="/edit-post" method="post">
+      <h4>Edit</h4>
+      <input name="id" value="<%= data._id %>" style="display: none" />
+      <input name="title" placeholder="title" value="<%= data.title %>" />
+      <input name="content" placeholder="content" value="<%= data.content %>" />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
