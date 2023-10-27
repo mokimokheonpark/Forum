@@ -116,3 +116,9 @@ app.put("/edit-put", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+app.delete("/delete", async (req, res) => {
+  let id = req.query.id;
+  await db.collection("post").deleteOne({ _id: new ObjectId(id) });
+  res.send("Successfully deleted");
+});

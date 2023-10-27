@@ -15,10 +15,23 @@
         <h4>
           <a href="/detail/<%= posts[i]._id %>"><%= posts[i].title %></a>
           <a href="/edit/<%= posts[i]._id %>">[Edit]</a>
+          <span class="delete" data-id="<%= posts[i]._id %>">[Delete]</span>
         </h4>
         <p><%= posts[i].content %></p>
       </div>
       <% } %>
     </div>
+
+    <script>
+      let postsLength = document.querySelectorAll(".delete").length;
+      for (let i = 0; i < postsLength; i++) {
+        document
+          .querySelectorAll(".delete")
+          [i].addEventListener("click", function (e) {
+            let id = e.target.dataset.id;
+            fetch("/delete?id=" + id, { method: "DELETE" });
+          });
+      }
+    </script>
   </body>
 </html>
