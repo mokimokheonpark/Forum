@@ -11,6 +11,8 @@ body {
 
 .nav a {
   margin-right: 10px;
+  text-decoration: none;
+  color: blue;
 }
 
 .logo {
