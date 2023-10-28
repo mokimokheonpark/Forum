@@ -28,7 +28,20 @@
           .querySelectorAll(".delete")
           [i].addEventListener("click", function (e) {
             let id = e.target.dataset.id;
-            fetch("/delete?id=" + id, { method: "DELETE" });
+            fetch("/delete?id=" + id, { method: "DELETE" })
+              .then((result) => {
+                if (result.status === 200) {
+                  return result.text();
+                } else {
+                  console.log("Internal Server Error");
+                }
+              })
+              .then((result) => {
+                e.target.parentElement.parentElement.style.display = "none";
+              })
+              .catch((error) => {
+                console.log("There was an error,", error);
+              });
           });
       }
     </script>
