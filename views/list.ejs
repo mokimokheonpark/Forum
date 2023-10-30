@@ -22,6 +22,10 @@
       <% } %>
     </div>
 
+    <% for (let i = 1; i <= pages; i++) { %>
+    <a class="page" href="/list/<%= i %>">[<%= i %>]</a>
+    <% } %>
+
     <a href="/list/next/<%= posts[posts.length-1]._id %>">Next</a>>
 
     <script>

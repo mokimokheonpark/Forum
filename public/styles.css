@@ -49,6 +49,11 @@ body {
   color: grey;
 }
 
+.page {
+  text-decoration: none;
+  color: blue;
+}
+
 input,
 div {
   box-sizing: border-box;

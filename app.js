@@ -125,14 +125,16 @@ app.delete("/delete", async (req, res) => {
 
 app.get("/list/:id", async (req, res) => {
   try {
-    let skippedDataLength = (req.params.id - 1) * 5;
+    let dataCount = await db.collection("post").countDocuments();
+    let pageCount = Math.ceil(dataCount / 5);
+    let skippedDataCount = (req.params.id - 1) * 5;
     let data = await db
       .collection("post")
       .find()
-      .skip(skippedDataLength)
+      .skip(skippedDataCount)
       .limit(5)
       .toArray();
-    res.render("list.ejs", { posts: data });
+    res.render("list.ejs", { posts: data, pages: pageCount });
   } catch (e) {
     console.log(e);
     res.status(500).send("Internal Server Error");
