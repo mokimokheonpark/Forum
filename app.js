@@ -140,17 +140,3 @@ app.get("/list/:id", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-
-app.get("/list/next/:id", async (req, res) => {
-  try {
-    let data = await db
-      .collection("post")
-      .find({ _id: { $gt: new ObjectId(req.params.id) } })
-      .limit(5)
-      .toArray();
-    res.render("list.ejs", { posts: data });
-  } catch (e) {
-    console.log(e);
-    res.status(500).send("Internal Server Error");
-  }
-});
