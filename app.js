@@ -9,6 +9,40 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
+const session = require("express-session");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+
+app.use(passport.initialize());
+app.use(
+  session({
+    secret: "123123",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.use(passport.session());
+
+passport.use(
+  new LocalStrategy(async (username, password, cb) => {
+    try {
+      let result = await db.collection("user").findOne({ username: username });
+      if (!result) {
+        return cb(null, false, { message: "wrong username" });
+      }
+      if (result.password == password) {
+        return cb(null, result);
+      } else {
+        return cb(null, false, { message: "wrong password" });
+      }
+    } catch (e) {
+      console.log(e);
+      res.status(500).send("Internal Server Error");
+    }
+  })
+);
+
 const { MongoClient, ObjectId } = require("mongodb");
 
 let db;
@@ -139,4 +173,25 @@ app.get("/list/:id", async (req, res) => {
     console.log(e);
     res.status(500).send("Internal Server Error");
   }
+});
+
+app.get("/login", async (req, res) => {
+  res.render("login.ejs");
+});
+
+app.post("/login", async (req, res, next) => {
+  passport.authenticate("local", (error, user, info) => {
+    if (error) {
+      return res.status(500).json(error);
+    }
+    if (!user) {
+      return res.status(401).json(info.message);
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      res.redirect("/");
+    });
+  })(req, res, next);
 });
