@@ -19,6 +19,7 @@ app.use(
     secret: "123123",
     resave: false,
     saveUninitialized: false,
+    cookie: { maxAge: 60 * 60 * 1000 },
   })
 );
 
@@ -42,6 +43,22 @@ passport.use(
     }
   })
 );
+
+passport.serializeUser((user, done) => {
+  process.nextTick(() => {
+    done(null, { id: user._id, username: user.username });
+  });
+});
+
+passport.deserializeUser(async (user, done) => {
+  let data = await db
+    .collection("user")
+    .findOne({ _id: new ObjectId(user.id) });
+  delete data.password;
+  process.nextTick(() => {
+    return done(null, data);
+  });
+});
 
 const { MongoClient, ObjectId } = require("mongodb");
 
