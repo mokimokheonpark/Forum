@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
-const port = 3000;
 const methodOverride = require("method-override");
 const bcrypt = require("bcrypt");
+require("dotenv").config();
 
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
@@ -18,13 +18,12 @@ const MongoStore = require("connect-mongo");
 app.use(passport.initialize());
 app.use(
   session({
-    secret: "123123",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 60 * 60 * 1000 },
+    cookie: { maxAge: process.env.COOKIE_MAX_AGE },
     store: MongoStore.create({
-      mongoUrl:
-        "mongodb+srv://mokimokheonpark:moki123@cluster0.f8wvtex.mongodb.net/?retryWrites=true&w=majority",
+      mongoUrl: process.env.MONGODB_URL,
       dbName: "Forum",
     }),
   })
@@ -70,15 +69,13 @@ passport.deserializeUser(async (user, done) => {
 const { MongoClient, ObjectId } = require("mongodb");
 
 let db;
-const url =
-  "mongodb+srv://mokimokheonpark:moki123@cluster0.f8wvtex.mongodb.net/?retryWrites=true&w=majority";
-new MongoClient(url)
+new MongoClient(process.env.MONGODB_URL)
   .connect()
   .then((client) => {
     console.log("Successfully connected to the DB");
     db = client.db("Forum");
-    app.listen(port, () => {
-      console.log(`Forum app listening on port ${port}`);
+    app.listen(process.env.PORT, () => {
+      console.log(`Forum app listening on port ${process.env.PORT}`);
     });
   })
   .catch((err) => {
