@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const methodOverride = require("method-override");
+const bcrypt = require("bcrypt");
 
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
@@ -28,12 +29,12 @@ app.use(passport.session());
 passport.use(
   new LocalStrategy(async (username, password, cb) => {
     try {
-      let result = await db.collection("user").findOne({ username: username });
-      if (!result) {
+      let data = await db.collection("user").findOne({ username: username });
+      if (!data) {
         return cb(null, false, { message: "wrong username" });
       }
-      if (result.password == password) {
-        return cb(null, result);
+      if (await bcrypt.compare(password, data.password)) {
+        return cb(null, data);
       } else {
         return cb(null, false, { message: "wrong password" });
       }
@@ -218,8 +219,9 @@ app.get("/signup", (req, res) => {
 });
 
 app.post("/signup", async (req, res) => {
+  let hash = await bcrypt.hash(req.body.password, 10);
   await db
     .collection("user")
-    .insertOne({ username: req.username, password: req.password });
+    .insertOne({ username: req.body.username, password: hash });
   res.redirect("/");
 });
