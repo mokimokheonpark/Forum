@@ -13,6 +13,7 @@ app.use(methodOverride("_method"));
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
+const MongoStore = require("connect-mongo");
 
 app.use(passport.initialize());
 app.use(
@@ -21,6 +22,11 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: { maxAge: 60 * 60 * 1000 },
+    store: MongoStore.create({
+      mongoUrl:
+        "mongodb+srv://mokimokheonpark:moki123@cluster0.f8wvtex.mongodb.net/?retryWrites=true&w=majority",
+      dbName: "Forum",
+    }),
   })
 );
 
