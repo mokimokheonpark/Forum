@@ -212,3 +212,14 @@ app.post("/login", async (req, res, next) => {
     });
   })(req, res, next);
 });
+
+app.get("/signup", (req, res) => {
+  res.render("signup.ejs");
+});
+
+app.post("/signup", async (req, res) => {
+  await db
+    .collection("user")
+    .insertOne({ username: req.username, password: req.password });
+  res.redirect("/");
+});
