@@ -21,7 +21,7 @@ app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: process.env.COOKIE_MAX_AGE },
+    cookie: { maxAge: 1000 * 60 * 60 },
     store: MongoStore.create({
       mongoUrl: process.env.MONGODB_URL,
       dbName: "Forum",
