@@ -88,3 +88,8 @@ div {
   padding: 15px;
   margin-top: 10px;
 }
+
+.detail-bg img {
+  width: 1000px;
+  height: 500px;
+}
