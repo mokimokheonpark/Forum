@@ -10,7 +10,7 @@
   <body class="grey-bg">
     <%- include("nav.ejs") %>
 
-    <form class="form-box" action="/edit-put?_method=put" method="post">
+    <form class="form-box" action="/edit/put?_method=put" method="post">
       <h4>Edit</h4>
       <input name="id" value="<%= data._id %>" style="display: none" />
       <input name="title" placeholder="title" value="<%= data.title %>" />
