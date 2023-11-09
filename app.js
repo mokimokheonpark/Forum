@@ -24,6 +24,24 @@ connectDB
     console.log(err);
   });
 
+const session = require("express-session");
+const passport = require("passport");
+const MongoStore = require("connect-mongo");
+app.use(passport.initialize());
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 1000 * 60 * 60 },
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URL,
+      dbName: "Forum",
+    }),
+  })
+);
+app.use(passport.session());
+
 app.use("/", require("./routes/home"));
 app.use("/list", require("./routes/list"));
 app.use("/detail", require("./routes/detail"));
