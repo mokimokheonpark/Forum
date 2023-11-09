@@ -11,7 +11,7 @@ connectDB
     console.log(err);
   });
 
-router.delete("/delete", async (req, res) => {
+router.delete("/", async (req, res) => {
   let id = req.query.id;
   await db.collection("post").deleteOne({ _id: new ObjectId(id) });
   res.send("Successfully deleted");
