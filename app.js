@@ -51,3 +51,11 @@ app.use("/profile", require("./routes/profile"));
 app.use("/write", require("./routes/write"));
 app.use("/edit", require("./routes/edit"));
 app.use("/delete", require("./routes/delete"));
+
+app.get("/search", async (req, res) => {
+  let data = await db
+    .collection("post")
+    .find({ title: { $regex: req.query.val } })
+    .toArray();
+  res.render("search.ejs", { posts: data });
+});
