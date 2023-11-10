@@ -9,8 +9,10 @@
 
   <body class="grey-bg">
     <%- include("nav.ejs") %>
+
     <input class="search" />
     <button class="search-button">Search</button>
+
     <script>
       document
         .querySelector(".search-button")
@@ -19,6 +21,7 @@
           location.href = "/search?val=" + input;
         });
     </script>
+
     <div class="white-bg">
       <% for (let i = 0; i < posts.length; i++) { %>
       <div class="list-box">
