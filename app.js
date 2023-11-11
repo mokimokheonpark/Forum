@@ -44,6 +44,7 @@ app.use(passport.session());
 
 app.use("/", require("./routes/home"));
 app.use("/list", require("./routes/list"));
+app.use("/search", require("./routes/search"));
 app.use("/detail", require("./routes/detail"));
 app.use("/signup", require("./routes/signup"));
 app.use("/login", require("./routes/login"));
@@ -51,16 +52,3 @@ app.use("/profile", require("./routes/profile"));
 app.use("/write", require("./routes/write"));
 app.use("/edit", require("./routes/edit"));
 app.use("/delete", require("./routes/delete"));
-
-app.get("/search", async (req, res) => {
-  let searchCondition = [
-    {
-      $search: {
-        index: "title_index",
-        text: { query: req.query.val, path: "title" },
-      },
-    },
-  ];
-  let data = await db.collection("post").aggregate(searchCondition).toArray();
-  res.render("search.ejs", { posts: data });
-});
