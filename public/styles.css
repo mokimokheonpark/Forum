@@ -69,6 +69,7 @@ body {
 }
 
 .page {
+  margin-left: 20px;
   text-decoration: none;
   color: blue;
 }
@@ -100,6 +101,12 @@ div {
   background: lightgrey;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.redirection {
+  margin-left: 20px;
+  text-decoration: none;
+  color: blue;
 }
 
 .detail-bg {
