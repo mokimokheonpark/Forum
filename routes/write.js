@@ -35,6 +35,8 @@ router.get("/", (req, res) => {
 });
 
 router.post("/post", upload.single("img1"), async (req, res) => {
+  console.log(req.user._id);
+  console.log(req.user.username);
   try {
     if (req.body.title === "") {
       res.send("Please write the title");
@@ -45,6 +47,8 @@ router.post("/post", upload.single("img1"), async (req, res) => {
         title: req.body.title,
         content: req.body.content,
         img: req.file.location,
+        user: req.user._id,
+        username: req.user.username,
       });
       res.redirect("/list/1");
     } else {

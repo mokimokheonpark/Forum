@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
   await db
     .collection("user")
     .insertOne({ username: req.body.username, password: hash });
-  res.redirect("/");
+  res.redirect("/login");
 });
 
 module.exports = router;
