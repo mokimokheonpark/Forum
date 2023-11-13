@@ -21,7 +21,11 @@ router.get("/:id", async (req, res) => {
       .skip(skippedDataCount)
       .limit(5)
       .toArray();
-    res.render("list.ejs", { posts: data, pages: pageCount });
+    res.render("list.ejs", {
+      posts: data,
+      pages: pageCount,
+      user: req.user,
+    });
   } catch (e) {
     console.log(e);
     res.status(500).send("Internal Server Error");
