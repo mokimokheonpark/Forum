@@ -31,12 +31,19 @@ const upload = multer({
 });
 
 router.get("/", (req, res) => {
-  res.render("write.ejs");
+  try {
+    if (req.user) {
+      res.render("write.ejs");
+    } else {
+      res.redirect("/login");
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 router.post("/post", upload.single("img1"), async (req, res) => {
-  console.log(req.user._id);
-  console.log(req.user.username);
   try {
     if (req.body.title === "") {
       res.send("Please write the title");
@@ -50,14 +57,15 @@ router.post("/post", upload.single("img1"), async (req, res) => {
         user: req.user._id,
         username: req.user.username,
       });
-      res.redirect("/list/1");
     } else {
       await db.collection("post").insertOne({
         title: req.body.title,
         content: req.body.content,
+        user: req.user._id,
+        username: req.user.username,
       });
-      res.redirect("/list/1");
     }
+    res.redirect("/list/1");
   } catch (e) {
     console.log(e);
     res.status(500).send("Internal Server Error");

@@ -2,9 +2,8 @@ const router = require("express").Router();
 
 router.get("/", async (req, res) => {
   try {
-    let user = req.user;
-    if (user) {
-      res.render("profile.ejs", { userInfo: user });
+    if (req.user) {
+      res.render("profile.ejs", { userInfo: req.user });
     } else {
       res.redirect("/login");
     }
