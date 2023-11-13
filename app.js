@@ -48,6 +48,7 @@ app.use("/search", require("./routes/search"));
 app.use("/detail", require("./routes/detail"));
 app.use("/signup", require("./routes/signup"));
 app.use("/login", require("./routes/login"));
+app.use("/logout", require("./routes/logout"));
 app.use("/profile", require("./routes/profile"));
 app.use("/write", require("./routes/write"));
 app.use("/edit", require("./routes/edit"));
