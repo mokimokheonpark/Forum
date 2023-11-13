@@ -13,8 +13,9 @@ connectDB
 
 router.get("/:id", async (req, res) => {
   try {
-    let id = req.params.id;
-    let data = await db.collection("post").findOne({ _id: new ObjectId(id) });
+    let data = await db
+      .collection("post")
+      .findOne({ _id: new ObjectId(req.params.id) });
     if (data === null) {
       res.status(400).send("Not Found");
     } else {
@@ -35,11 +36,10 @@ router.put("/put", async (req, res) => {
     } else if (req.body.content === "") {
       res.send("Please write the content");
     } else {
-      let id = req.body.id;
       await db
         .collection("post")
         .updateOne(
-          { _id: new ObjectId(id) },
+          { _id: new ObjectId(req.body.id), user: new ObjectId(req.user._id) },
           { $set: { title: req.body.title, content: req.body.content } }
         );
       res.redirect("/list/1");

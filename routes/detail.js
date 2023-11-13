@@ -13,8 +13,9 @@ connectDB
 
 router.get("/:id", async (req, res) => {
   try {
-    let id = req.params.id;
-    let data = await db.collection("post").findOne({ _id: new ObjectId(id) });
+    let data = await db
+      .collection("post")
+      .findOne({ _id: new ObjectId(req.params.id) });
     if (data === null) {
       res.status(404).send("Not Found");
     } else {
