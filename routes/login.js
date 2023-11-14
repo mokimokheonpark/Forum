@@ -67,7 +67,7 @@ passport.deserializeUser(async (user, done) => {
 });
 
 router.get("/", async (req, res) => {
-  res.render("login.ejs");
+  res.render("login.ejs", { user: req.user });
 });
 
 router.post("/", async (req, res, next) => {

@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
     },
   ];
   let data = await db.collection("post").aggregate(searchCondition).toArray();
-  res.render("search.ejs", { posts: data });
+  res.render("search.ejs", { posts: data, user: req.user });
 });
 
 module.exports = router;

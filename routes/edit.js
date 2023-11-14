@@ -19,7 +19,7 @@ router.get("/:id", async (req, res) => {
     if (data === null) {
       res.status(400).send("Not Found");
     } else {
-      res.render("edit.ejs", { data: data });
+      res.render("edit.ejs", { data: data, user: req.user });
     }
   } catch (e) {
     console.log(e);

@@ -8,7 +8,9 @@
   </head>
 
   <body class="grey-bg">
-    <%- include("nav.ejs") %>
+    <% if (!user) { %> <%- include("nav.ejs") %> <% } %>
+    <span></span>
+    <% if (user) { %> <%- include("navi.ejs") %> <% } %>
 
     <form class="form-box" action="/signup" method="post">
       <h4>Sign-Up</h4>

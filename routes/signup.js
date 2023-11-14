@@ -13,7 +13,7 @@ connectDB
 const bcrypt = require("bcrypt");
 
 router.get("/", (req, res) => {
-  res.render("signup.ejs");
+  res.render("signup.ejs", { user: req.user });
 });
 
 router.post("/", async (req, res) => {

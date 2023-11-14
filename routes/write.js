@@ -33,7 +33,7 @@ const upload = multer({
 router.get("/", (req, res) => {
   try {
     if (req.user) {
-      res.render("write.ejs");
+      res.render("write.ejs", { user: req.user });
     } else {
       res.redirect("/login");
     }
