@@ -65,7 +65,9 @@ router.post("/post", upload.single("img1"), async (req, res) => {
         username: req.user.username,
       });
     }
-    res.redirect("/list/1");
+    let dataCount = await db.collection("post").countDocuments();
+    let lastPage = Math.ceil(dataCount / 5);
+    res.redirect("/list/" + lastPage);
   } catch (e) {
     console.log(e);
     res.status(500).send("Internal Server Error");
