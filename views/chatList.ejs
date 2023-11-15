@@ -12,6 +12,7 @@
     <span></span>
     <% if (user) { %> <%- include("navi.ejs") %> <% } %>
 
+    <h4>My Chat-Room List</h4>
     <div class="white-bg">
       <% for (let i = 0; i < chatList.length; i++) { %>
       <div class="list-box">
@@ -20,7 +21,10 @@
             Chat-Room Number <%= i+1 %>
           </a>
         </h4>
-        <p>Chat-Room Description...</p>
+        <p><%= chatList[i]._id %></p>
+        <p><%= chatList[i].participants[0] %></p>
+        <p><%= chatList[i].participants[1] %></p>
+        <p><%= chatList[i].date %></p>
       </div>
       <% } %>
     </div>
