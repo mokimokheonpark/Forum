@@ -13,9 +13,27 @@
     <% if (user) { %> <%- include("navi.ejs") %> <% } %>
 
     <div class="detail-bg">
-      <h4><%= data.title %></h4>
-      <p><%= data.content %></p>
-      <img src="<%= data.img %>" onerror="this.style.display='none'" />
+      <h4><%= postData.title %></h4>
+      <p><%= postData.content %></p>
+      <img src="<%= postData.img %>" onerror="this.style.display='none'" />
+      <hr style="margin-top: 60px" />
+      <div>
+        <% for (let i = 0; i < commentData.length; i++) { %>
+        <p>
+          <strong><%= commentData[i].username %>:</strong>
+          <%= commentData[i].content %>
+        </p>
+        <% } %>
+      </div>
+      <form action="/comment" method="POST">
+        <input name="content" />
+        <input
+          name="parentId"
+          value="<%= postData._id %>"
+          style="display: none"
+        />
+        <button type="submit">Add a comment</button>
+      </form>
     </div>
   </body>
 </html>
