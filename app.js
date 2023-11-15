@@ -47,6 +47,7 @@ app.use("/list", require("./routes/list"));
 app.use("/search", require("./routes/search"));
 app.use("/detail", require("./routes/detail"));
 app.use("/comment", require("./routes/comment"));
+app.use("/chat", require("./routes/chat"));
 app.use("/signup", require("./routes/signup"));
 app.use("/login", require("./routes/login"));
 app.use("/logout", require("./routes/logout"));

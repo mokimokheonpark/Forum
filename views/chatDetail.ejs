@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat-Detail</title>
+    <link href="/styles.css" rel="stylesheet" />
+  </head>
+
+  <body class="grey-bg">
+    <% if (!user) { %> <%- include("nav.ejs") %> <% } %>
+    <span></span>
+    <% if (user) { %> <%- include("navi.ejs") %> <% } %>
+
+    <div class="detail-bg">
+      <div class="chat-screen">
+        <div class="chat-box"><span>Hello</span></div>
+        <div class="chat-box"><span>Nice to meet you!</span></div>
+        <div class="chat-box mine"><span>Nice to meet you, too!</span></div>
+      </div>
+    </div>
+    <div class="chat-form">
+      <input class="chat-input" />
+      <button class="chat-button">Submit</button>
+    </div>
+  </body>
+</html>

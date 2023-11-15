@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat-List</title>
+    <link href="/styles.css" rel="stylesheet" />
+  </head>
+
+  <body class="grey-bg">
+    <% if (!user) { %> <%- include("nav.ejs") %> <% } %>
+    <span></span>
+    <% if (user) { %> <%- include("navi.ejs") %> <% } %>
+
+    <div class="white-bg">
+      <% for (let i = 0; i < chatList.length; i++) { %>
+      <div class="list-box">
+        <h4>
+          <a href="/chat/detail/<%= chatList[i]._id %>">
+            Chat-Room Number <%= i+1 %>
+          </a>
+        </h4>
+        <p>Chat-Room Description...</p>
+      </div>
+      <% } %>
+    </div>
+  </body>
+</html>

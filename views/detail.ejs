@@ -16,6 +16,9 @@
       <h4><%= postData.title %></h4>
       <p><%= postData.content %></p>
       <img src="<%= postData.img %>" onerror="this.style.display='none'" />
+
+      <a href="/chat/request?postUser=<%= postData.user %>">Start Chatting</a>
+
       <hr style="margin-top: 60px" />
       <div>
         <% for (let i = 0; i < commentData.length; i++) { %>
@@ -25,6 +28,7 @@
         </p>
         <% } %>
       </div>
+
       <form action="/comment" method="POST">
         <input name="content" />
         <input
