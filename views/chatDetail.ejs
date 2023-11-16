@@ -23,5 +23,30 @@
       <input class="chat-input" />
       <button class="chat-button">Submit</button>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/socket.io@4.7.2/client-dist/socket.io.min.js"></script>
+    <script>
+      const socket = io();
+      socket.emit("ask-to-join", "<%= chatDetail._id %>");
+
+      document
+        .querySelector(".chat-button")
+        .addEventListener("click", function () {
+          let input = document.querySelector(".chat-input").value;
+          socket.emit("send-message", {
+            msg: input,
+            room: "<%= chatDetail._id %>",
+          });
+        });
+
+      socket.on("show-message", (data) => {
+        document
+          .querySelector(".chat-screen")
+          .insertAdjacentHTML(
+            "beforeend",
+            `<div class="chat-box"><span>${data}</span></div>`
+          );
+      });
+    </script>
   </body>
 </html>

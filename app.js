@@ -2,6 +2,11 @@ const express = require("express");
 const app = express();
 const methodOverride = require("method-override");
 
+const { createServer } = require("http");
+const { Server } = require("socket.io");
+const server = createServer(app);
+const io = new Server(server);
+
 require("dotenv").config();
 
 app.use(express.static(__dirname + "/public"));
@@ -16,7 +21,7 @@ connectDB
   .then((client) => {
     console.log("Successfully connected to the DB");
     db = client.db("Forum");
-    app.listen(process.env.PORT, () => {
+    server.listen(process.env.PORT, () => {
       console.log(`Forum app listening on port ${process.env.PORT}`);
     });
   })
@@ -55,3 +60,13 @@ app.use("/profile", require("./routes/profile"));
 app.use("/write", require("./routes/write"));
 app.use("/edit", require("./routes/edit"));
 app.use("/delete", require("./routes/delete"));
+
+io.on("connection", (socket) => {
+  socket.on("ask-to-join", (data) => {
+    socket.join(data);
+  });
+
+  socket.on("send-message", (data) => {
+    io.to(data.room).emit("show-message", data.msg);
+  });
+});
