@@ -17,11 +17,15 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  let hash = await bcrypt.hash(req.body.password, 10);
-  await db
-    .collection("user")
-    .insertOne({ username: req.body.username, password: hash });
-  res.redirect("/login");
+  if (req.body.usernmae === "" || req.body.password === "") {
+    res.redirect("/signup");
+  } else {
+    let hash = await bcrypt.hash(req.body.password, 10);
+    await db
+      .collection("user")
+      .insertOne({ username: req.body.username, password: hash });
+    res.redirect("/login");
+  }
 });
 
 module.exports = router;

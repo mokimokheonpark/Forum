@@ -37,12 +37,18 @@ passport.use(
     try {
       let data = await db.collection("user").findOne({ username: username });
       if (!data) {
-        return cb(null, false, { message: "wrong username" });
+        return cb(null, false, {
+          message:
+            "You entered wrong username. Please click the back button and enter a correct username.",
+        });
       }
       if (await bcrypt.compare(password, data.password)) {
         return cb(null, data);
       } else {
-        return cb(null, false, { message: "wrong password" });
+        return cb(null, false, {
+          message:
+            "You entered wrong password. Please click the back button and enter a correct password.",
+        });
       }
     } catch (e) {
       console.log(e);
@@ -71,20 +77,24 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res, next) => {
-  passport.authenticate("local", (error, user, info) => {
-    if (error) {
-      return res.status(500).json(error);
-    }
-    if (!user) {
-      return res.status(401).json(info.message);
-    }
-    req.logIn(user, (err) => {
-      if (err) {
-        return next(err);
+  if (req.body.usernmae === "" || req.body.password === "") {
+    res.redirect("/login");
+  } else {
+    passport.authenticate("local", (error, user, info) => {
+      if (error) {
+        return res.status(500).json(error);
       }
-      res.redirect("/");
-    });
-  })(req, res, next);
+      if (!user) {
+        return res.status(401).json(info.message);
+      }
+      req.logIn(user, (err) => {
+        if (err) {
+          return next(err);
+        }
+        res.redirect("/");
+      });
+    })(req, res, next);
+  }
 });
 
 module.exports = router;

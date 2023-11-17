@@ -44,33 +44,33 @@ router.get("/", (req, res) => {
 });
 
 router.post("/post", upload.single("img1"), async (req, res) => {
-  try {
-    if (req.body.title === "") {
-      res.send("Please write the title");
-    } else if (req.body.content === "") {
-      res.send("Please write the content");
-    } else if (req.file) {
-      await db.collection("post").insertOne({
-        title: req.body.title,
-        content: req.body.content,
-        img: req.file.location,
-        user: req.user._id,
-        username: req.user.username,
-      });
-    } else {
-      await db.collection("post").insertOne({
-        title: req.body.title,
-        content: req.body.content,
-        user: req.user._id,
-        username: req.user.username,
-      });
+  if (req.body.title === "" || req.body.content === "") {
+    res.redirect("/write");
+  } else {
+    try {
+      if (req.file) {
+        await db.collection("post").insertOne({
+          title: req.body.title,
+          content: req.body.content,
+          img: req.file.location,
+          user: req.user._id,
+          username: req.user.username,
+        });
+      } else {
+        await db.collection("post").insertOne({
+          title: req.body.title,
+          content: req.body.content,
+          user: req.user._id,
+          username: req.user.username,
+        });
+      }
+      let dataCount = await db.collection("post").countDocuments();
+      let lastPage = Math.ceil(dataCount / 10);
+      res.redirect("/list/" + lastPage);
+    } catch (e) {
+      console.log(e);
+      res.status(500).send("Internal Server Error");
     }
-    let dataCount = await db.collection("post").countDocuments();
-    let lastPage = Math.ceil(dataCount / 10);
-    res.redirect("/list/" + lastPage);
-  } catch (e) {
-    console.log(e);
-    res.status(500).send("Internal Server Error");
   }
 });
 
