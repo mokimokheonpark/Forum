@@ -42,7 +42,7 @@ router.put("/put", async (req, res) => {
           { _id: new ObjectId(req.body.id), user: new ObjectId(req.user._id) },
           { $set: { title: req.body.title, content: req.body.content } }
         );
-      res.redirect("/list/1");
+      res.redirect(`/detail/${req.body.id}`);
     }
   } catch (e) {
     console.log(e);

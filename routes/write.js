@@ -66,7 +66,7 @@ router.post("/post", upload.single("img1"), async (req, res) => {
       });
     }
     let dataCount = await db.collection("post").countDocuments();
-    let lastPage = Math.ceil(dataCount / 5);
+    let lastPage = Math.ceil(dataCount / 10);
     res.redirect("/list/" + lastPage);
   } catch (e) {
     console.log(e);

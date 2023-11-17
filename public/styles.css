@@ -2,6 +2,10 @@ body {
   margin: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 .nav {
   display: flex;
   padding: 15px;
@@ -11,7 +15,6 @@ body {
 
 .nav a {
   margin-right: 10px;
-  text-decoration: none;
   color: blue;
 }
 
@@ -54,12 +57,13 @@ body {
 }
 
 .list-box a {
-  text-decoration: none;
   color: black;
 }
 
 .list-box span {
   cursor: pointer;
+  float: right;
+  color: blue;
 }
 
 .list-box p {
@@ -115,9 +119,36 @@ div {
   margin-top: 10px;
 }
 
+.detail-bg h4 {
+  font-size: 25px;
+  margin: 5px;
+}
+
+.detail-bg p {
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 .detail-bg img {
   width: 1000px;
   height: 500px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.detail-bg a {
+  color: blue;
+  font-size: 20px;
+  margin: 5px;
+}
+
+.detail-bg hr {
+  margin-top: 60px;
 }
 
 .chat-screen {

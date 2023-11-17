@@ -13,13 +13,13 @@ connectDB
 router.get("/:id", async (req, res) => {
   try {
     let dataCount = await db.collection("post").countDocuments();
-    let pageCount = Math.ceil(dataCount / 5);
-    let skippedDataCount = (req.params.id - 1) * 5;
+    let pageCount = Math.ceil(dataCount / 10);
+    let skippedDataCount = (req.params.id - 1) * 10;
     let data = await db
       .collection("post")
       .find()
       .skip(skippedDataCount)
-      .limit(5)
+      .limit(10)
       .toArray();
     res.render("list.ejs", {
       posts: data,

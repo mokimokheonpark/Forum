@@ -17,9 +17,19 @@
       <p><%= postData.content %></p>
       <img src="<%= postData.img %>" onerror="this.style.display='none'" />
 
-      <a href="/chat/request?postUser=<%= postData.user %>">Start Chatting</a>
+      <div>
+        <% if (user && user._id.toString() === postData.user.toString()) { %>
+        <a href="/edit/<%= postData._id %>">[Edit]</a>
+        <% } %>
+      </div>
 
-      <hr style="margin-top: 60px" />
+      <div>
+        <a href="/chat/request?postUser=<%= postData.user %>"
+          >[Start Chatting]</a
+        >
+      </div>
+
+      <hr />
       <div>
         <% for (let i = 0; i < commentData.length; i++) { %>
         <p>
