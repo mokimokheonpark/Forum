@@ -15,8 +15,15 @@
     <form class="form-box" action="/edit/put?_method=put" method="post">
       <h4>Edit</h4>
       <input name="id" value="<%= data._id %>" style="display: none" />
-      <input name="title" placeholder="title" value="<%= data.title %>" />
-      <input name="content" placeholder="content" value="<%= data.content %>" />
+      <input
+        name="title"
+        placeholder="title"
+        value="<%= data.title %>"
+        required
+      />
+      <textarea name="content" placeholder="content" required>
+<%= data.content %></textarea
+      >
       <button type="submit">Submit</button>
     </form>
   </body>
