@@ -13,21 +13,21 @@
     <% if (user) { %> <%- include("navi.ejs") %> <% } %>
 
     <div class="detail-bg">
-      <h4><%= postData.title %></h4>
-      <p><%= postData.content %></p>
-      <img src="<%= postData.img %>" onerror="this.style.display='none'" />
-
-      <div>
-        <% if (user && user._id.toString() === postData.user.toString()) { %>
-        <a href="/edit/<%= postData._id %>">[Edit]</a>
-        <% } %>
-      </div>
-
-      <div>
+      <h4>
+        <%= postData.title %>
+        <span><%= postData.username %> </span>
+      </h4>
+      <span>
         <a href="/chat/request?postUser=<%= postData.user %>"
           >[Start Chatting]</a
         >
-      </div>
+      </span>
+      <p><%= postData.content %></p>
+      <img src="<%= postData.img %>" onerror="this.style.display='none'" />
+
+      <% if (user && user._id.toString() === postData.user.toString()) { %>
+      <a href="/edit/<%= postData._id %>">[Edit]</a>
+      <% } %>
 
       <hr />
       <div>

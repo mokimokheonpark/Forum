@@ -134,6 +134,10 @@ div {
   margin: 5px;
 }
 
+.detail-bg span {
+  float: right;
+}
+
 .detail-bg p {
   font-size: 20px;
   margin-top: 20px;

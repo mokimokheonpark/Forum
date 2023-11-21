@@ -48,18 +48,19 @@ app.use(
 app.use(passport.session());
 
 app.use("/", require("./routes/home"));
-app.use("/list", require("./routes/list"));
-app.use("/search", require("./routes/search"));
-app.use("/detail", require("./routes/detail"));
-app.use("/comment", require("./routes/comment"));
 app.use("/chat", require("./routes/chat"));
-app.use("/signup", require("./routes/signup"));
+app.use("/comment", require("./routes/comment"));
+app.use("/delete", require("./routes/delete"));
+app.use("/detail", require("./routes/detail"));
+app.use("/edit", require("./routes/edit"));
+app.use("/list", require("./routes/list"));
 app.use("/login", require("./routes/login"));
 app.use("/logout", require("./routes/logout"));
+app.use("/mylist", require("./routes/mylist"));
 app.use("/profile", require("./routes/profile"));
+app.use("/search", require("./routes/search"));
+app.use("/signup", require("./routes/signup"));
 app.use("/write", require("./routes/write"));
-app.use("/edit", require("./routes/edit"));
-app.use("/delete", require("./routes/delete"));
 
 io.on("connection", (socket) => {
   socket.on("ask-to-join", (data) => {
