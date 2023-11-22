@@ -10,19 +10,24 @@ connectDB
     console.log(err);
   });
 
-router.get("/", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     if (req.user) {
-      let postCount = await db
-        .collection("post")
-        .countDocuments({ user: req.user._id });
-      let commentCount = await db
+      let myDataCount = await db
         .collection("comment")
         .countDocuments({ userId: req.user._id });
-      res.render("profile.ejs", {
+      let pageCount = Math.ceil(myDataCount / 10);
+      let skippedDataCount = (req.params.id - 1) * 10;
+      let data = await db
+        .collection("comment")
+        .find({ userId: req.user._id })
+        .skip(skippedDataCount)
+        .limit(10)
+        .toArray();
+      res.render("myComment.ejs", {
+        comments: data,
+        pages: pageCount,
         user: req.user,
-        postCount: postCount,
-        commentCount: commentCount,
       });
     } else {
       res.redirect("/login");

@@ -56,6 +56,7 @@ app.use("/edit", require("./routes/edit"));
 app.use("/list", require("./routes/list"));
 app.use("/login", require("./routes/login"));
 app.use("/logout", require("./routes/logout"));
+app.use("/mycomment", require("./routes/mycomment"));
 app.use("/mylist", require("./routes/mylist"));
 app.use("/profile", require("./routes/profile"));
 app.use("/search", require("./routes/search"));

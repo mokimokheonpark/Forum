@@ -13,11 +13,9 @@ connectDB
 router.get("/:id", async (req, res) => {
   try {
     if (req.user) {
-      let myData = await db
+      let myDataCount = await db
         .collection("post")
-        .find({ user: req.user._id })
-        .toArray();
-      let myDataCount = myData.length;
+        .countDocuments({ user: req.user._id });
       let pageCount = Math.ceil(myDataCount / 10);
       let skippedDataCount = (req.params.id - 1) * 10;
       let data = await db
