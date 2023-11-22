@@ -11,19 +11,27 @@ connectDB
   });
 
 router.get("/", async (req, res) => {
-  if (req.query.val === "") {
-    res.redirect("list/1");
-  } else {
-    let searchCondition = [
-      {
-        $search: {
-          index: "title_index",
-          text: { query: req.query.val, path: "title" },
+  try {
+    if (req.query.val === "") {
+      res.redirect("list/1");
+    } else {
+      let searchCondition = [
+        {
+          $search: {
+            index: "title_index",
+            text: { query: req.query.val, path: "title" },
+          },
         },
-      },
-    ];
-    let data = await db.collection("post").aggregate(searchCondition).toArray();
-    res.render("search.ejs", { posts: data, user: req.user });
+      ];
+      let data = await db
+        .collection("post")
+        .aggregate(searchCondition)
+        .toArray();
+      res.render("search.ejs", { posts: data, user: req.user });
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(500).send("Internal Server Error");
   }
 });
 

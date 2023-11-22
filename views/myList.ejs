@@ -12,18 +12,6 @@
     <span></span>
     <% if (user) { %> <%- include("navi.ejs") %> <% } %>
 
-    <input class="search" placeholder="title" required />
-    <button class="search-button">Search</button>
-
-    <script>
-      document
-        .querySelector(".search-button")
-        .addEventListener("click", function () {
-          let input = document.querySelector(".search").value;
-          location.href = "/search?val=" + input;
-        });
-    </script>
-
     <div class="white-bg">
       <% for (let i = 0; i < posts.length; i++) { %>
       <div class="list-box">
