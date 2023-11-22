@@ -32,10 +32,20 @@
       <hr />
       <div>
         <% for (let i = 0; i < commentData.length; i++) { %>
-        <p>
-          <strong><%= commentData[i].username %>:</strong>
-          <%= commentData[i].content %>
+        <span></span>
+        <% if (user && user._id.toString() === commentData[i].userId.toString())
+        { %>
+        <p style="color: tomato">
+          <%= commentData[i].username %>:
+          <strong><%= commentData[i].content %></strong>
         </p>
+        <% } else { %>
+        <p>
+          <%= commentData[i].username %>:
+          <strong><%= commentData[i].content %></strong>
+        </p>
+        <% } %>
+        <span></span>
         <% } %>
       </div>
 

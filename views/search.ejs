@@ -29,13 +29,20 @@
     <div class="white-bg">
       <% for (let i = 0; i < posts.length; i++) { %>
       <div class="list-box">
+        <% if (user && user._id.toString() === posts[i].user.toString()) { %>
+        <h4>
+          <a href="/detail/<%= posts[i]._id %>" style="color: tomato"
+            ><%= posts[i].title %></a
+          >
+          <span class="delete" data-id="<%= posts[i]._id %>">[Delete]</span>
+        </h4>
+        <p style="color: tomato"><%= posts[i].username %></p>
+        <% } else { %>
         <h4>
           <a href="/detail/<%= posts[i]._id %>"><%= posts[i].title %></a>
-          <% if (user && user._id.toString() === posts[i].user.toString()) { %>
-          <span class="delete" data-id="<%= posts[i]._id %>">[Delete]</span>
-          <% } %>
         </h4>
         <p><%= posts[i].username %></p>
+        <% } %>
       </div>
       <% } %>
     </div>
