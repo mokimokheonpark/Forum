@@ -73,7 +73,12 @@ passport.deserializeUser(async (user, done) => {
 });
 
 router.get("/", async (req, res) => {
-  res.render("login.ejs", { user: req.user });
+  try {
+    res.render("login.ejs", { user: req.user });
+  } catch (e) {
+    console.log(e);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 router.post("/", async (req, res, next) => {

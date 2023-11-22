@@ -13,7 +13,12 @@ connectDB
 const bcrypt = require("bcrypt");
 
 router.get("/", (req, res) => {
-  res.render("signup.ejs", { user: req.user });
+  try {
+    res.render("signup.ejs", { user: req.user });
+  } catch (e) {
+    console.log(e);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 router.post("/", async (req, res) => {
