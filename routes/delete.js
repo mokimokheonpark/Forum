@@ -16,6 +16,9 @@ router.delete("/", async (req, res) => {
     _id: new ObjectId(req.query.id),
     user: new ObjectId(req.user._id),
   });
+  await db.collection("comment").deleteMany({
+    parentId: new ObjectId(req.query.id),
+  });
   res.send("Successfully deleted");
 });
 
