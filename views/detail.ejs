@@ -25,9 +25,11 @@
       <p><%= postData.content %></p>
       <img src="<%= postData.img %>" onerror="this.style.display='none'" />
 
-      <% if (user && user._id.toString() === postData.user.toString()) { %>
-      <a href="/edit/<%= postData._id %>">[Edit]</a>
-      <% } %>
+      <div>
+        <% if (user && user._id.toString() === postData.user.toString()) { %>
+        <a href="/edit/<%= postData._id %>">[Edit]</a>
+        <% } %>
+      </div>
 
       <hr />
       <div>

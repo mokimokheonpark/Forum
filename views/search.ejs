@@ -31,9 +31,9 @@
       <div class="list-box">
         <% if (user && user._id.toString() === posts[i].user.toString()) { %>
         <h4>
-          <a href="/detail/<%= posts[i]._id %>" style="color: tomato"
-            ><%= posts[i].title %></a
-          >
+          <a href="/detail/<%= posts[i]._id %>" style="color: tomato">
+            <%= posts[i].title %>
+          </a>
           <span class="delete" data-id="<%= posts[i]._id %>">[Delete]</span>
         </h4>
         <p style="color: tomato"><%= posts[i].username %></p>
