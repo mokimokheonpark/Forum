@@ -18,11 +18,15 @@
         <span><%= postData.username %> </span>
       </h4>
       <span>
-        <a href="/chat/request?postUser=<%= postData.user %>"
-          >[Start Chatting]</a
-        >
+        <a href="/chat/request?postUser=<%= postData.user %>">
+          [Start Chatting]
+        </a>
       </span>
-      <p><%= postData.content %></p>
+
+      <div class="detail-content">
+        <p><%= postData.content %></p>
+      </div>
+
       <img src="<%= postData.img %>" onerror="this.style.display='none'" />
 
       <div>
