@@ -18,9 +18,13 @@
         <span><%= postData.username %> </span>
       </h4>
       <span>
-        <a href="/chat/request?postUser=<%= postData.user %>">
+        <% if (user && user._id.toString() !== postData.user.toString()) { %>
+        <a
+          href="/chat/request?postDataUser=<%= postData.user %>&postDataUsername=<%= postData.username %>"
+        >
           [Start Chatting]
         </a>
+        <% } %>
       </span>
 
       <div class="detail-content">

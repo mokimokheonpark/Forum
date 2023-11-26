@@ -13,11 +13,23 @@ connectDB
 
 router.get("/request", async (req, res) => {
   try {
-    await db.collection("chatroom").insertOne({
-      participants: [req.user._id, new ObjectId(req.query.postUser)],
-      date: new Date(),
-    });
-    res.redirect("/chat/list");
+    if (req.user) {
+      let data = await db.collection("chatroom").findOne({
+        users: [req.user._id, new ObjectId(req.query.postDataUser)],
+      });
+      if (data) {
+        res.redirect(`/chat/detail/${data._id}`);
+      } else {
+        await db.collection("chatroom").insertOne({
+          users: [req.user._id, new ObjectId(req.query.postDataUser)],
+          usernames: [req.user.username, req.query.postDataUsername],
+          date: new Date(),
+        });
+        res.redirect("/chat/list");
+      }
+    } else {
+      res.redirect("/login");
+    }
   } catch (e) {
     console.log(e);
     res.status(500).send("Internal Server Error");
@@ -26,11 +38,15 @@ router.get("/request", async (req, res) => {
 
 router.get("/list", async (req, res) => {
   try {
-    let data = await db
-      .collection("chatroom")
-      .find({ participants: req.user._id })
-      .toArray();
-    res.render("chatList.ejs", { chatList: data, user: req.user });
+    if (req.user) {
+      let data = await db
+        .collection("chatroom")
+        .find({ users: req.user._id })
+        .toArray();
+      res.render("chatList.ejs", { chatList: data, user: req.user });
+    } else {
+      res.redirect("/login");
+    }
   } catch (e) {
     console.log(e);
     res.status(500).send("Internal Server Error");
@@ -43,8 +59,9 @@ router.get("/detail/:id", async (req, res) => {
       .collection("chatroom")
       .findOne({ _id: new ObjectId(req.params.id) });
     if (
-      req.user._id.toString() === data.participants[0].toString() ||
-      req.user._id.toString() === data.participants[1].toString()
+      req.user &&
+      (req.user._id.toString() === data.users[0].toString() ||
+        req.user._id.toString() === data.users[1].toString())
     ) {
       res.render("chatDetail.ejs", { chatDetail: data, user: req.user });
     } else {

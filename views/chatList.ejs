@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat-List</title>
+    <title>My-Chat-Rooms</title>
     <link href="/styles.css" rel="stylesheet" />
   </head>
 
@@ -12,19 +12,23 @@
     <span></span>
     <% if (user) { %> <%- include("navi.ejs") %> <% } %>
 
-    <h4>My Chat-Room List</h4>
+    <h4>My Chat Rooms</h4>
+
     <div class="white-bg">
       <% for (let i = 0; i < chatList.length; i++) { %>
       <div class="list-box">
         <h4>
           <a href="/chat/detail/<%= chatList[i]._id %>">
-            Chat-Room Number <%= i+1 %>
+            Chat Room <%= i+1 %>
           </a>
         </h4>
-        <p><%= chatList[i]._id %></p>
-        <p><%= chatList[i].participants[0] %></p>
-        <p><%= chatList[i].participants[1] %></p>
-        <p><%= chatList[i].date %></p>
+        <p>
+          Participants:
+          <strong>
+            <%= chatList[i].usernames[0] %>, <%= chatList[i].usernames[1]%>
+          </strong>
+        </p>
+        <p>Created at: <strong><%= chatList[i].date %></strong></p>
       </div>
       <% } %>
     </div>

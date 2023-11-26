@@ -19,10 +19,14 @@ router.get("/", async (req, res) => {
       let commentCount = await db
         .collection("comment")
         .countDocuments({ userId: req.user._id });
+      let chatRoomCount = await db
+        .collection("chatroom")
+        .countDocuments({ participants: req.user._id });
       res.render("profile.ejs", {
         user: req.user,
         postCount: postCount,
         commentCount: commentCount,
+        chatRoomCount: chatRoomCount,
       });
     } else {
       res.redirect("/login");
