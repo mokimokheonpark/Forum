@@ -206,13 +206,16 @@ div {
 
 .chat-input {
   margin-top: 15px;
+  margin-left: 20px;
   padding: 10px;
   border-radius: 5px;
 }
 
 .chat-button {
+  margin-left: 10px;
   padding: 10px;
   border: none;
   background: lightgrey;
   border-radius: 5px;
+  cursor: pointer;
 }

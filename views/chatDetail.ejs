@@ -12,42 +12,69 @@
     <span></span>
     <% if (user) { %> <%- include("navi.ejs") %> <% } %>
 
-    <h4>Chat Room</h4>
+    <h4>Chat Room <%= room %></h4>
+    <h4></h4>
 
     <div class="detail-bg">
       <div class="chat-screen">
-        <div class="chat-box"><span>Hello</span></div>
-        <div class="chat-box"><span>Nice to meet you!</span></div>
-        <div class="chat-box mine"><span>Nice to meet you, too!</span></div>
+        <% for (let i = 0; i < messageData.length; i++) { %>
+        <span></span>
+        <% if (user._id.toString() === messageData[i].user.toString()) { %>
+        <div class="chat-box mine">
+          <span>
+            <%= messageData[i].username %>:
+            <strong><%= messageData[i].message %></strong>
+          </span>
+        </div>
+        <% } else { %>
+        <div class="chat-box">
+          <span>
+            <%= messageData[i].username %>:
+            <strong><%= messageData[i].message %></strong>
+          </span>
+        </div>
+        <% } %> <% } %>
       </div>
     </div>
-    <div class="chat-form">
+
+    <form class="chat-form">
       <input class="chat-input" />
-      <button class="chat-button">Submit</button>
-    </div>
+      <button class="chat-button">Enter</button>
+    </form>
 
     <script src="https://cdn.jsdelivr.net/npm/socket.io@4.7.2/client-dist/socket.io.min.js"></script>
     <script>
       const socket = io();
-      socket.emit("ask-to-join", "<%= chatDetail._id %>");
+      socket.emit("ask-to-join", "<%= chatRoomData._id %>");
 
       document
         .querySelector(".chat-button")
         .addEventListener("click", function () {
           let input = document.querySelector(".chat-input").value;
           socket.emit("send-message", {
-            msg: input,
-            room: "<%= chatDetail._id %>",
+            room: "<%= chatRoomData._id %>",
+            user: "<%= user._id %>",
+            username: "<%= user.username %>",
+            message: input,
           });
         });
 
       socket.on("show-message", (data) => {
-        document
-          .querySelector(".chat-screen")
-          .insertAdjacentHTML(
-            "beforeend",
-            `<div class="chat-box"><span>${data}</span></div>`
-          );
+        if ("<%= user._id %>" === data.user) {
+          document
+            .querySelector(".chat-screen")
+            .insertAdjacentHTML(
+              "beforeend",
+              `<div class="chat-box mine"><span>${data.username}: <strong>${data.message}</strong></span></div>`
+            );
+        } else {
+          document
+            .querySelector(".chat-screen")
+            .insertAdjacentHTML(
+              "beforeend",
+              `<div class="chat-box"><span>${data.username}: <strong>${data.message}</strong></span></div>`
+            );
+        }
       });
     </script>
   </body>

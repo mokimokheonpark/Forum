@@ -18,7 +18,7 @@
       <% for (let i = 0; i < chatList.length; i++) { %>
       <div class="list-box">
         <h4>
-          <a href="/chat/detail/<%= chatList[i]._id %>">
+          <a href="/chat/detail/<%= chatList[i]._id %>?room=<%= i+1 %>">
             Chat Room <%= i+1 %>
           </a>
         </h4>

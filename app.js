@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
+const { ObjectId } = require("mongodb");
 const connectDB = require("./database");
 let db;
 connectDB
@@ -68,7 +69,13 @@ io.on("connection", (socket) => {
     socket.join(data);
   });
 
-  socket.on("send-message", (data) => {
-    io.to(data.room).emit("show-message", data.msg);
+  socket.on("send-message", async (data) => {
+    await db.collection("message").insertOne({
+      room: new ObjectId(data.room),
+      user: new ObjectId(data.user),
+      username: data.username,
+      message: data.message,
+    });
+    io.to(data.room).emit("show-message", data);
   });
 });

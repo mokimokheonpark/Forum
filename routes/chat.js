@@ -55,15 +55,24 @@ router.get("/list", async (req, res) => {
 
 router.get("/detail/:id", async (req, res) => {
   try {
-    let data = await db
+    let chatRoomData = await db
       .collection("chatroom")
       .findOne({ _id: new ObjectId(req.params.id) });
+    let messageData = await db
+      .collection("message")
+      .find({ room: new ObjectId(req.params.id) })
+      .toArray();
     if (
       req.user &&
-      (req.user._id.toString() === data.users[0].toString() ||
-        req.user._id.toString() === data.users[1].toString())
+      (req.user._id.toString() === chatRoomData.users[0].toString() ||
+        req.user._id.toString() === chatRoomData.users[1].toString())
     ) {
-      res.render("chatDetail.ejs", { chatDetail: data, user: req.user });
+      res.render("chatDetail.ejs", {
+        chatRoomData: chatRoomData,
+        messageData: messageData,
+        room: req.query.room,
+        user: req.user,
+      });
     } else {
       res.status(403).send("Forbidden");
     }
