@@ -70,7 +70,6 @@ router.get("/detail/:id", async (req, res) => {
       res.render("chatDetail.ejs", {
         chatRoomData: chatRoomData,
         messageData: messageData,
-        room: req.query.room,
         user: req.user,
       });
     } else {

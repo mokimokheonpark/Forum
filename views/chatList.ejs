@@ -18,7 +18,7 @@
       <% for (let i = 0; i < chatList.length; i++) { %>
       <div class="list-box">
         <h4>
-          <a href="/chat/detail/<%= chatList[i]._id %>?room=<%= i+1 %>">
+          <a href="/chat/detail/<%= chatList[i]._id %>">
             Chat Room <%= i+1 %>
           </a>
         </h4>
@@ -28,7 +28,6 @@
             <%= chatList[i].usernames[0] %>, <%= chatList[i].usernames[1]%>
           </strong>
         </p>
-        <p>Created at: <strong><%= chatList[i].date %></strong></p>
       </div>
       <% } %>
     </div>

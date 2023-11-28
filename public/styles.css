@@ -28,6 +28,11 @@ a {
 
 .grey-bg h4 {
   margin-left: 20px;
+  font-size: 20px;
+}
+
+.grey-bg p {
+  margin-left: 20px;
 }
 
 .search {

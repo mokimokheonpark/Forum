@@ -12,8 +12,14 @@
     <span></span>
     <% if (user) { %> <%- include("navi.ejs") %> <% } %>
 
-    <h4>Chat Room <%= room %></h4>
-    <h4></h4>
+    <h4>Chat Room</h4>
+    <p>
+      Participants:
+      <strong>
+        <%= chatRoomData.usernames[0] %>, <%= chatRoomData.usernames[1] %>
+      </strong>
+    </p>
+    <p>Created at: <strong><%= chatRoomData.date %></strong></p>
 
     <div class="detail-bg">
       <div class="chat-screen">

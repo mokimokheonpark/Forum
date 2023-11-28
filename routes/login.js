@@ -23,7 +23,7 @@ router.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 },
+    cookie: { maxAge: 1000 * 60 * 60 * 24 },
     store: MongoStore.create({
       mongoUrl: process.env.MONGODB_URL,
       dbName: "Forum",
