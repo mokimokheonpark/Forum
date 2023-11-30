@@ -17,13 +17,13 @@
 
 ## Deployment
 
-The application is deployed on AWS Elastic Beanstalk. Explore the application [HERE](http://forum-env.eba-xi8mnzin.us-east-2.elasticbeanstalk.com/) to test its features and functionalities.
+The application is deployed on AWS Elastic Beanstalk. Explore the application [here](http://forum-env.eba-xi8mnzin.us-east-2.elasticbeanstalk.com/) to test its features and functionalities.
 
 ## User Experience Features
 
 - **User Authentication**: Seamlessly create accounts and log in/out of the application.
 - **Post Creation**: Share ideas, feelings, information, or questions with the option to include images.
-- **Post Control**: Users have full control over their posts, with the ability to edit or delete them.
+- **Post Control**: Have full control over their posts, with the ability to edit or delete them.
 - **Comments Section**: Engage with other users through the comments section on posts.
 - **Search Capability**: Easily search for specific posts based on title.
 - **Real-time Chat**: Connect with other users through real-time chat functionality.
