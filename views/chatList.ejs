@@ -12,7 +12,12 @@
     <span></span>
     <% if (user) { %> <%- include("navi.ejs") %> <% } %>
 
+    <span></span>
+    <% if (chatList.length > 0) { %>
     <h4>My Chat Rooms</h4>
+    <% } else { %>
+    <h4>You have not participate in any chat rooms yet.</h4>
+    <% } %>
 
     <div class="white-bg">
       <% for (let i = 0; i < chatList.length; i++) { %>
