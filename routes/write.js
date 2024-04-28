@@ -35,7 +35,7 @@ router.get("/", (req, res) => {
     if (req.user) {
       res.render("write.ejs", { user: req.user });
     } else {
-      res.redirect("/login");
+      res.render("login-required.ejs", { user: req.user });
     }
   } catch (e) {
     console.log(e);

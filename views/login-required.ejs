@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log-In-Required</title>
+    <link href="/styles.css" rel="stylesheet" />
+  </head>
+
+  <body class="grey-bg">
+    <% if (!user) { %> <%- include("nav.ejs") %> <% } %>
+    <span></span>
+    <% if (user) { %> <%- include("navi.ejs") %> <% } %>
+
+    <div class="detail-bg">
+      <h4>
+        Please log in first to write a post!
+        <a class="redirection" href="/login">[Log in]</a>
+      </h4>
+    </div>
+  </body>
+</html>
