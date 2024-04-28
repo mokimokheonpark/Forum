@@ -224,3 +224,11 @@ div {
   border-radius: 5px;
   cursor: pointer;
 }
+
+.mb p {
+  margin-bottom: -15px;
+}
+
+.mt {
+  margin-top: 30px;
+}
