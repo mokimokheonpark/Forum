@@ -32,11 +32,7 @@ const upload = multer({
 
 router.get("/", (req, res) => {
   try {
-    if (req.user) {
-      res.render("write.ejs", { user: req.user });
-    } else {
-      res.render("login-required.ejs", { user: req.user });
-    }
+    res.render("write.ejs", { user: req.user });
   } catch (e) {
     console.log(e);
     res.status(500).send("Internal Server Error");

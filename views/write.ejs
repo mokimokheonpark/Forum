@@ -12,6 +12,8 @@
     <span></span>
     <% if (user) { %> <%- include("navi.ejs") %> <% } %>
 
+    <span></span>
+    <% if (user) { %>
     <form
       class="form-box"
       action="/write/post"
@@ -24,5 +26,11 @@
       <input type="file" name="img1" accept="image/*" multiple />
       <button type="submit">Post</button>
     </form>
+    <% } else { %>
+    <h4>
+      Please log in first to write a post!
+      <a class="redirection" href="/login">[Log in]</a>
+    </h4>
+    <% } %>
   </body>
 </html>
