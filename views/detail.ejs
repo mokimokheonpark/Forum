@@ -59,6 +59,13 @@
         <% } %>
       </div>
 
+      <hr />
+      <% if (!user) { %>
+      <h4>
+        Please log in first to add a comment!
+        <a class="redirection" href="/login">[Log in]</a>
+      </h4>
+      <% } else { %>
       <form action="/comment" method="POST">
         <input name="content" />
         <input
@@ -68,6 +75,7 @@
         />
         <button type="submit">Add a comment</button>
       </form>
+      <% } %>
     </div>
   </body>
 </html>
