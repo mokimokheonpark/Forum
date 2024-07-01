@@ -1,6 +1,6 @@
 # Forum
 
-[Forum](http://forum-env.eba-xi8mnzin.us-east-2.elasticbeanstalk.com/) is a dynamic web application that provides a platform for users to share ideas, express feelings, exchange information, and pose questions. Engage in vibrant conversations through post comments and real-time chat with fellow users.
+Forum is a dynamic web application that provides a platform for users to share ideas, express feelings, exchange information, and pose questions. Engage in vibrant conversations through post comments and real-time chat with fellow users.
 
 ## Project Highlights
 
@@ -17,7 +17,7 @@
 
 ## Deployment
 
-The application is deployed on AWS Elastic Beanstalk. Explore the application [here](http://forum-env.eba-xi8mnzin.us-east-2.elasticbeanstalk.com/) to test its features and functionalities.
+The application was previously deployed on AWS Elastic Beanstalk but has been temporarily discontinued to reduce monthly expenses.
 
 ## User Experience Features
 
